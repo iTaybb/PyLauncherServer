@@ -75,7 +75,7 @@ deploy:
   before_script:
     - pip install awsebcli  # awscli
   script:
-    - eb deploy $AWS_EB_ENV_NAME
+    - eb deploy $AWS_EB_ENV_NAME --profile default
   only:
     - master
   when: manual
