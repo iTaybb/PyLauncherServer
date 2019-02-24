@@ -4,9 +4,9 @@ variables:
   AWS_EB_ENV_NAME: "Pylauncherserver-env-1"
 
 stages:
-  - build
-  - test
-  - package
+  #- build
+  #- test
+  #- package
   - deploy
 
 after_script:
