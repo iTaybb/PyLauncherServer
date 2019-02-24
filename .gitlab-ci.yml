@@ -15,23 +15,44 @@ stages:
   - deploy
 
 before_script:
+  - date
   - python -V
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
   - pip install -r requirements.txt 
 
-job 1:
+Echo:
   stage: build
   script: echo "Building..."
 
-job 2:
+Test Py3.4:
+  image: python:3.4
   stage: test
   script: pytest -v
 
-job 3:
+Test Py3.5:
+  image: python:3.5
+  stage: test
+  script: pytest -v
+
+Test Py3.6:
+  image: python:3.6
+  stage: test
+  script: pytest -v
+
+Test Py3.7:
+  image: python:3.7
+  stage: test
+  script: pytest -v
+
+Deploying:
   stage: deploy
-  script: echo "Deploying..."
+  script: cat application.py | gzip > package.gz
+  when: manual
+  artifacts:
+    paths:
+      - package.gz
 
 after_script:
-  - echo OK!!
+  - date
