@@ -29,7 +29,8 @@ Compile py:
   stage: build
   script:
     - cat application.py utils.py > compiled.py
-    - echo DummyHTML > index.html
+    - echo Deployed. > index.html
+    - echo COMMIT $CI_COMMIT_SHORT_SHA >> index.html
   artifacts:
     paths:
       - compiled.py
