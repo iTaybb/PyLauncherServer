@@ -52,7 +52,7 @@ deploy gz:
 deploy iso:
   stage: package
   image: alpine
-  before-script:
+  before_script:
     - echo "ipv6" >> /etc/modules
     - apk update
     - apk add xorriso
