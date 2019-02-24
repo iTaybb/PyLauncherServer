@@ -1,5 +1,8 @@
 image: python:3.7
 
+variables:
+  AWS_EB_ENV_NAME: "Pylauncherserver-env-1"
+
 stages:
   - build
   - test
@@ -68,9 +71,9 @@ deploy:
   stage: deploy
   image: python:latest
   before_script:
-    - pip install awscli
+    - pip install awsebcli  # awscli
   script:
-    - aws
+    - eb deploy $AWS_EB_ENV_NAME
   only:
     - master
   when: manual
