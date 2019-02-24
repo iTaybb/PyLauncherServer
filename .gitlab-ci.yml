@@ -1,7 +1,8 @@
 image: python:3.7
 
 variables:
-  S3_BUCKET_NAME: "itay-gitlab-ci-test"
+  S3_BUCKET_NAME_STAGE: "itay-gitlab-ci-test"
+  S3_BUCKET_NAME_PROD: "itay-gitlab-ci-prod"
 
 stages:
   - build
@@ -79,7 +80,7 @@ deploy:
   before_script:
     - pip install awscli  # awscli
   script:
-    - aws s3 cp ./ s3://$S3_BUCKET_NAME/ --recursive --exclude "*" --include "*.html"
+    - aws s3 cp ./ s3://$S3_BUCKET_NAME_STAGE/ --recursive --exclude "*" --include "*.html"
   only:
     - master
   # when: manual
