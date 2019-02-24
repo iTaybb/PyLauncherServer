@@ -20,24 +20,24 @@ Test Py3.5:
   image: python:3.5
   stage: test
   before_script:
-  - date
-  - python -V
-  - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt 
+    - date
+    - python -V
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt 
   script: pytest -v
 
 Test Py3.6:
   image: python:3.6
   stage: test
   before_script:
-  - date
-  - python -V
-  - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
-  - pip install -r requirements.txt 
+    - date
+    - python -V
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt 
   script: pytest -v
 
 deploy gz:
