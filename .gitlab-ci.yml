@@ -30,8 +30,9 @@ Compile py:
   stage: build
   script:
     - cat application.py utils.py > compiled.py
-    - echo Deployed. > index.html
-    - echo COMMIT $CI_COMMIT_SHORT_SHA >> index.html
+    - echo "Deployed.<br>" > index.html
+    - echo "COMMIT $CI_COMMIT_SHORT_SHA <br>" >> index.html
+    - echo "DATE $(DATE)<br>" >> index.html
   artifacts:
     paths:
       - compiled.py
