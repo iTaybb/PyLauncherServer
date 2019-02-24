@@ -4,9 +4,9 @@ variables:
   AWS_EB_ENV_NAME: "Pylauncherserver-env-1"
 
 stages:
-  #- build
-  #- test
-  #- package
+  - build
+  - test
+  - package
   - deploy
 
 after_script:
@@ -22,6 +22,8 @@ after_script:
     - source venv/bin/activate
     - pip install -r requirements.txt 
   script: pytest -v
+  only:
+    - never
 
 Compile py:
   stage: build
