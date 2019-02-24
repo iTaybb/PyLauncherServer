@@ -8,13 +8,13 @@ variables:
     - venv/
 
 before_script:
-  - python -V               # Print out python version for debugging
+  - python -V
   - pip install virtualenv
   - virtualenv venv
   - source venv/bin/activate
 
 test:
   script:
-  - pytest
-  - pip install tox flake8  # you can also use tox
-  - tox -e py36,flake8
+    - pytest
+    - pip install tox flake8  # you can also use tox
+    - tox -e py36,flake8
