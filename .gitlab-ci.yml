@@ -24,7 +24,7 @@ after_script:
     - pip install -r requirements.txt 
   script: pytest -v
   only:
-    - never
+    - never  # disable tests temporarly
 
 Compile py:
   stage: build
@@ -32,7 +32,9 @@ Compile py:
     - cat application.py utils.py > compiled.py
     - echo "Deployed.<br>" > index.html
     - echo "COMMIT $CI_COMMIT_SHORT_SHA <br>" >> index.html
+    - echo "BUILD REF NAME $CI_BUILD_REF_NAME <br>" >> index.html
     - echo "DATE $(date)<br>" >> index.html
+
   artifacts:
     paths:
       - compiled.py
