@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - package
+  - deploy
 
 after_script:
   - date
@@ -43,7 +44,7 @@ Test Py3.7:
   <<: *testingStage
   image: python:3.7
 
-deploy gz:
+package gz:
   stage: package
   image: alpine
   script: cat compiled.py | gzip > package.gz
@@ -52,7 +53,7 @@ deploy gz:
     paths:
       - package.gz
 
-deploy iso:
+package iso:
   stage: package
   image: alpine
   before_script:
@@ -60,6 +61,17 @@ deploy iso:
     - apk update
     - apk add xorriso
   script: mkisofs -o ./packaged.iso ./compiled.py
+  when: manual
+  artifacts:
+    paths:
+      - packaged.iso
+
+package iso:
+  stage: deploy
+  image: alpine
+  script: echo deployinggg
+  only:
+    - master
   when: manual
   artifacts:
     paths:
