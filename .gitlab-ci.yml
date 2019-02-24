@@ -8,6 +8,17 @@ stages:
 after_script:
   - date
 
+TestingStage: &testingStage
+  stage: test
+    before_script:
+      - date
+      - python -V
+      - pip install virtualenv
+      - virtualenv venv
+      - source venv/bin/activate
+      - pip install -r requirements.txt 
+    script: pytest -v
+
 Echo:
   stage: build
   script: cat application.py utils.py > compiled.py
@@ -16,29 +27,21 @@ Echo:
       - compiled.py
     expire_in: 20 minutes
 
+Test Py3.4:
+  <<: *testingStage
+  image: python:3.4
+
 Test Py3.5:
+  <<: *testingStage
   image: python:3.5
-  stage: test
-  before_script:
-    - date
-    - python -V
-    - pip install virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
-    - pip install -r requirements.txt 
-  script: pytest -v
 
 Test Py3.6:
+  <<: *testingStage
   image: python:3.6
-  stage: test
-  before_script:
-    - date
-    - python -V
-    - pip install virtualenv
-    - virtualenv venv
-    - source venv/bin/activate
-    - pip install -r requirements.txt 
-  script: pytest -v
+
+Test Py3.7:
+  <<: *testingStage
+  image: python:3.7
 
 deploy gz:
   stage: package
