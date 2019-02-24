@@ -77,7 +77,9 @@ package iso:
 
 deploy to staging:
   stage: deploy
-  environment: staging
+  environment:
+    name: staging
+    url: http://itay-gitlab-ci-test.s3-website.us-east-2.amazonaws.com/
   image: python:latest
   before_script:
     - pip install awscli  # awscli
@@ -86,7 +88,9 @@ deploy to staging:
 
 deploy to prod:
   stage: deploy
-  environment: prod
+  environment:
+    name: prod
+    url: http://itay-gitlab-ci-prod.s3-website.us-east-2.amazonaws.com/
   image: python:latest
   before_script:
     - pip install awscli  # awscli
