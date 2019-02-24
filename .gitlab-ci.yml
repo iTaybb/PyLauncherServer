@@ -1,7 +1,7 @@
 image: python:3.7
 
 variables:
-  AWS_EB_ENV_NAME: "Pylauncherserver-env-1"
+  S3_BUCKET_NAME: "itay-gitlab-ci-test"
 
 stages:
   - build
@@ -27,10 +27,13 @@ after_script:
 
 Compile py:
   stage: build
-  script: cat application.py utils.py > compiled.py
+  script:
+    - cat application.py utils.py > compiled.py
+    - echo DummyHTML > index.html
   artifacts:
     paths:
       - compiled.py
+      - index.html
     expire_in: 20 minutes
 
 Test Py3.4:
@@ -73,9 +76,9 @@ deploy:
   stage: deploy
   image: python:latest
   before_script:
-    - pip install awsebcli  # awscli
+    - pip install awscli  # awscli
   script:
-    - eb deploy $AWS_EB_ENV_NAME --profile default
+    - aws s3 cp ./ s3://$S3_BUCKET_NAME/ --recursive --exclude "*" --include "*.html"
   only:
     - master
   when: manual
