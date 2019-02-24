@@ -1,14 +1,5 @@
 image: python:3.7
 
-variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
-
-cache:
-  paths:
-    - .cache/pip
-    - venv/
-
-
 stages:
   - build
   - test
@@ -24,7 +15,11 @@ before_script:
 
 Echo:
   stage: build
-  script: echo "Building..."
+  script: cat application.py utils.py > compiled.py
+  artifacts:
+    paths:
+      - compiled.py
+    expire_in: 20 minutes
 
 Test Py3.4:
   image: python:3.4
@@ -48,7 +43,8 @@ Test Py3.7:
 
 Deploying:
   stage: deploy
-  script: cat application.py | gzip > package.gz
+  image: alpine
+  script: cat compiled.py | gzip > package.gz
   when: manual
   artifacts:
     paths:
