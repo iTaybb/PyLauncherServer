@@ -20,7 +20,7 @@ after_script:
     - pip install -r requirements.txt 
   script: pytest -v
 
-Echo:
+Compile py:
   stage: build
   script: cat application.py utils.py > compiled.py
   artifacts:
@@ -66,11 +66,11 @@ package iso:
 
 deploy:
   stage: deploy
-  image: alpine
-  script: echo deployinggg
+  image: python:latest
+  before_script:
+    - pip install awscli
+  script:
+    - aws
   only:
     - master
   when: manual
-  artifacts:
-    paths:
-      - packaged.iso
