@@ -8,7 +8,7 @@ stages:
 after_script:
   - date
 
-TestingStage: &testingStage
+.TestingStage: &testingStage
   stage: test
   before_script:
     - date
