@@ -75,16 +75,18 @@ package iso:
     paths:
       - packaged.iso
 
-deploy to stage:
+deploy to staging:
   stage: deploy
+  environment: staging
   image: python:latest
   before_script:
     - pip install awscli  # awscli
   script:
     - aws s3 cp ./ s3://$S3_BUCKET_NAME_STAGE/ --recursive --exclude "*" --include "*.html"
 
-deploy to live:
+deploy to prod:
   stage: deploy
+  environment: prod
   image: python:latest
   before_script:
     - pip install awscli  # awscli
