@@ -32,7 +32,7 @@ Compile py:
     - cat application.py utils.py > compiled.py
     - echo "Deployed.<br>" > index.html
     - echo "COMMIT $CI_COMMIT_SHORT_SHA <br>" >> index.html
-    - echo "DATE $(DATE)<br>" >> index.html
+    - echo "DATE $(date)<br>" >> index.html
   artifacts:
     paths:
       - compiled.py
@@ -75,13 +75,21 @@ package iso:
     paths:
       - packaged.iso
 
-deploy:
+deploy to stage:
   stage: deploy
   image: python:latest
   before_script:
     - pip install awscli  # awscli
   script:
     - aws s3 cp ./ s3://$S3_BUCKET_NAME_STAGE/ --recursive --exclude "*" --include "*.html"
+
+deploy to live:
+  stage: deploy
+  image: python:latest
+  before_script:
+    - pip install awscli  # awscli
+  script:
+    - aws s3 cp ./ s3://$S3_BUCKET_NAME_LIVE/ --recursive --exclude "*" --include "*.html"
   only:
     - master
-  # when: manual
+  when: manual
