@@ -10,14 +10,14 @@ after_script:
 
 TestingStage: &testingStage
   stage: test
-    before_script:
-      - date
-      - python -V
-      - pip install virtualenv
-      - virtualenv venv
-      - source venv/bin/activate
-      - pip install -r requirements.txt 
-    script: pytest -v
+  before_script:
+    - date
+    - python -V
+    - pip install virtualenv
+    - virtualenv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt 
+  script: pytest -v
 
 Echo:
   stage: build
