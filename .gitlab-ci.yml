@@ -48,7 +48,6 @@ package gz:
   stage: package
   image: alpine
   script: cat compiled.py | gzip > package.gz
-  when: manual
   artifacts:
     paths:
       - package.gz
@@ -61,12 +60,11 @@ package iso:
     - apk update
     - apk add xorriso
   script: mkisofs -o ./packaged.iso ./compiled.py
-  when: manual
   artifacts:
     paths:
       - packaged.iso
 
-package iso:
+deploy:
   stage: deploy
   image: alpine
   script: echo deployinggg
