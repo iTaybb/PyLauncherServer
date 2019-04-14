@@ -1,9 +1,9 @@
 branch-defaults:
   default:
-    environment: Pylauncherserver-env
+    environment: Pylauncherserver-env-2
     group_suffix: null
   master:
-    environment: Pylauncherserver-env
+    environment: Pylauncherserver-env-17
 environment-defaults:
   Pylauncherserver-env:
     branch: null
@@ -11,7 +11,7 @@ environment-defaults:
 global:
   application_name: PyLauncherServer
   branch: null
-  default_ec2_keyname: null
+  default_ec2_keyname: itay
   default_platform: Python 3.6
   default_region: us-east-2
   include_git_submodules: true

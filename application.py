@@ -136,7 +136,7 @@ def exec(lang):
             if [x for x in e.args if isinstance(x, urllib3.exceptions.ReadTimeoutError)]:  # if timeout
                 return die("Execution time has passed the limit of {} seconds.".format(MAX_EXECUTION_LIMIT))
             else:
-                return die()
+                return die()  # the error might be sensitive - don't expose the reason
         except (docker.errors.NotFound, utils.FileTooBigException) as e:
             return die(str(e))
         except docker.errors.DockerException as e:
