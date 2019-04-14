@@ -1,9 +1,11 @@
 branch-defaults:
   default:
-    environment: Pylauncherserver-env-1
+    environment: Pylauncherserver-env
     group_suffix: null
+  master:
+    environment: Pylauncherserver-env
 environment-defaults:
-  Pylauncherserver-env-1:
+  Pylauncherserver-env:
     branch: null
     repository: null
 global:

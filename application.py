@@ -17,7 +17,7 @@ import requests.exceptions
 
 import utils
 
-__version__ = "2019.02.07"
+__version__ = "2019.04.14"
 
 app = Flask(__name__)
 application = app  # Elastic Beanstalk looks for the "application" WGSI app.
